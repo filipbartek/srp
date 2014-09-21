@@ -31,7 +31,8 @@ test(n0, [true(Partners == [])]) :- srp([], Partners).
 test(n1, [true(Partners == [1])]) :- srp([[1]], Partners).
 test(n2, [true(Partners == [2,1])]) :- srp([[2,1], [1,2]], Partners).
 %Source: http://en.wikipedia.org/wiki/Stable_roommates_problem#Solution
-test(fail_wikipedia, [fail]) :- srp([[2,3,4], [3,1,4], [1,2,4], [1,2,3]], _Partners).
+test(fail_wikipedia, [fail]) :-
+  srp([[2,3,4], [3,1,4], [1,2,4], [1,2,3]], _Partners).
 test(friends_fail, [fail]) :-
   srp([[3,4,2], [3], [1,2,4], [3,1,2]], _Partners).
 test(friends_true, true(Partners == [3,4,1,2])) :-
