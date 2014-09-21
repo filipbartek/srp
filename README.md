@@ -2,6 +2,15 @@
 
 Stable roommates problem solver
 
+This solver finds a perfect stable matching (if such matching exists) for a given set of lists of preferences (not necessarily complete).
+
+Note especially that the solver isn't able to find imperfect matchings.
+
+## Definitions
+
+* Stable matching: [Stable roommates problem - Wikipedia](http://en.wikipedia.org/wiki/Stable_roommates_problem)
+* Perfect matching: [Matching - Wikipedia](http://en.wikipedia.org/wiki/Matching_%28graph_theory%29#Definition)
+
 ## Tools
 
 * [SICStus Prolog](https://sicstus.sics.se/) 4.2.3
