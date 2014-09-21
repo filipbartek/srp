@@ -36,6 +36,9 @@ test(friends_fail, [fail]) :-
   srp([[3,4,2], [3], [1,2,4], [3,1,2]], _Partners).
 test(friends_true, true(Partners == [3,4,1,2])) :-
   srp([[3,4,2], [3,4], [1,2,4], [3,1,2]], Partners).
+%Source: http://en.wikipedia.org/wiki/Stable_roommates_problem#Example
+test(wiki_6, [true(Partners == [6,4,5,2,3,1])]) :-
+  srp([[3,4,2,6,5], [6,5,4,1,3], [2,4,5,1,6], [5,2,3,6,1], [3,1,2,4,6], [5,1,3,4,2]], Partners).
 :- end_tests(srp).
 
 %Constrains Partners according to Preferences
