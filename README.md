@@ -1,4 +1,3 @@
-srp
-===
+# srp
 
 Stable roommates problem solver
