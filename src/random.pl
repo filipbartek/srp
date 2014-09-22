@@ -20,6 +20,9 @@ Arguments:
 N - Number of participants
 Preferences - List of permutations of participant indices,
 each ranging from 1 to N
+
+Example of usage:
+> random:setrand(0), generate_preferences(64, Preferences), srp(Preferences, Partners).
 */
 
 random_preferences(N, Preferences) :-
