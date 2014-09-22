@@ -19,11 +19,33 @@
 ]).
 
 
-%srp(+Preferences, ?Partners)
+/*
+Predicate: srp/2
+
+srp(+Preferences:list, -Partners:list) is nondet.
+
+srp(+Preferences:list, +Partners:list) is semidet.
+
+Arguments:
+Preferences - List of lists of participants ordered according to desirability
+Partners - Assignment of partners
+*/
+
 srp(Preferences, Partners) :-
   srp(Preferences, Partners, _K).
 
-%srp(+Preferences, ?Partners, ?K)
+
+/*
+Predicate: srp/3
+
+srp(+Preferences:list, -Partners:list, -K:int) is nondet.
+
+Arguments:
+Preferences - List of lists of participants ordered according to desirability
+Partners - Assignment of partners
+K - Unified with the number of choices made in search for the assignment
+*/
+
 srp(Preferences, Partners, K) :-
   make_scores(Preferences, Scores),
   srp_scores(Scores, Partners, K),
@@ -85,6 +107,23 @@ members([EH|ET], [LH|LT]) :-
   members(ET, LT).
 
 
+/*
+Predicate: srp_scores/3
+
+srp_scores(+Scores:list, +Partners:list, +K:int) is semidet.
+
+srp_scores(+Scores:list, -Partners:list, -K:int) is nondet.
+
+Arguments:
+Scores - List of lists of scores
+Partners - Assignment of partners
+K - Number of assumptions made in labeling procedure
+
+Lower score signifies more desired candidate partner
+Equal score signifies undistinguishable candidate partner
+Each participant must assign every participant a score
+*/
+
 srp_scores(Scores, Partners, K) :-
   length(Scores, N),
   length(Partners, N),
@@ -133,6 +172,18 @@ stable_pair(Scores, PartnerScores, I, J) :-
   nth1(I, PartnerScores, ScoreIP), %ScoreIP: CP variable
   nth1(J, PartnerScores, ScoreJP), %ScoreJP: CP variable
   ScoreIP #=< ScoreIJ #\/ ScoreJP #=< ScoreJI. %Constrain!
+
+
+/*
+Predicate: make_scores/2
+
+make_scores(+Preferences:list, -Scores:list) is det.
+
+Arguments:
+Preferences - List of lists of candidates ordered by desirability
+Scores - List of lists of scores
+*/
+
 make_scores(Preferences, Scores) :-
   length(Preferences, N),
   make_scores(Preferences, Scores, N).
