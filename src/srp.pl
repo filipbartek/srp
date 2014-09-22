@@ -33,6 +33,9 @@ srp(+Preferences:list, +Partners:list) is semidet.
 Arguments:
 Preferences - List of lists of participants ordered according to desirability
 Partners - Assignment of partners
+
+See Also:
+<srp/3>
 */
 
 srp(Preferences, Partners) :-
