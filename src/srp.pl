@@ -34,7 +34,7 @@ Arguments:
 Preferences - List of lists of participants ordered according to desirability
 Partners - Assignment of partners
 
-See Also:
+See also:
 <srp/3>
 */
 
