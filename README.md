@@ -32,3 +32,12 @@ This project uses plunit library for unit testing. To run the tests, consult a s
 plunit:run_tests.
 ```
 Detailed instructions for running the tests are available in [plunit documentation](https://sicstus.sics.se/sicstus/docs/latest4/html/sicstus.html/lib_002dplunit.html#lib_002dplunit).
+
+## Documentation
+
+Code documentation can be generated using [NaturalDocs](http://www.naturaldocs.org/).
+A Windows batch script that facilitates the task is provided in
+[NaturalDocs/build.bat](https://github.com/filipbartek/srp/blob/master/NaturalDocs/build.bat).
+
+Code documentation is also available on the project's [GitHub web page](http://filipbartek.github.io/srp/).
+Note that this version is not synchronized automatically with master branch and may be outdated.
