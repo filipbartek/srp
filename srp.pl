@@ -25,11 +25,9 @@ srp(Preferences, Partners) :-
 
 %srp(+Preferences, ?Partners, ?K)
 srp(Preferences, Partners, K) :-
-  length(Preferences, N),
-  length(Partners, N),
-  assignment(Partners, Partners),
-  stable(Preferences, Partners),
-  labeling([assumptions(K)], Partners).
+  make_scores(Preferences, Scores),
+  srp_scores(Scores, Partners, K),
+  members(Partners, Preferences).
 
 :- begin_tests(srp).
 
@@ -79,61 +77,88 @@ test(kleinberg_2, [all(Partners == [[3,4,1,2], [4,3,2,1]])]) :-
 :- end_tests(srp).
 
 
-%Constrains Partners according to Preferences
-%stable(+Preferences, ?Partners)
-stable(Preferences, Partners) :-
-  length(Preferences, N),
-  stable_prefix(Preferences, Partners, N).
+%members(?Elements, ?Lists)
+members([], []).
+members([EH|ET], [LH|LT]) :-
+  member(EH, LH),
+  members(ET, LT).
 
-:- begin_tests(stable).
-test(true, [true]) :- stable([[2,1], [1,2]], [2,1]).
-test(fail, [fail]) :- stable([[2,1], [1,2]], [1,2]).
-:- end_tests(stable).
 
-%stable_prefix(+Preferences, ?Partners, +I)
-stable_prefix(Preferences, Partners, I) :-
+srp_scores(Scores, Partners, K) :-
+  length(Scores, N),
+  length(Partners, N),
+  domain(Partners, 1, N),
+  assignment(Partners, Partners),
+  length(PartnerScores, N),
+  domain(PartnerScores, 1, N),
+  elements(Partners, Scores, PartnerScores), %Bind Partners and PartnerScores
+  stable_prefix_i(Scores, PartnerScores, N, N), %Constrain PartnerScores
+  labeling([assumptions(K)], Partners).
+
+:- begin_tests(srp_scores).
+test(kleinberg_2, [all(Partners == [[3,4,1,2], [4,3,2,1]])]) :-
+  srp_scores([[4,4,1,2],[4,4,2,1],[2,1,4,4],[1,2,4,4]], Partners, _K).
+:- end_tests(srp_scores).
+
+
+%elements(?Xs, +Lists, ?Ys)
+elements([], [], []).
+elements([X|Xs], [List|Lists], [Y|Ys]) :-
+  element(X, List, Y),
+  elements(Xs, Lists, Ys).
+
+%stable_prefix_i(+Scores, ?PartnerScores, +N, +I)
+stable_prefix_i(Scores, PartnerScores, N, I) :-
   (I == 0
   ; I > 0 ->
-    length(Preferences, N),
-    stable_prefix(Preferences, Partners, I, N),
     I1 is I - 1,
-    stable_prefix(Preferences, Partners, I1)).
+    stable_prefix_ij(Scores, PartnerScores, I, I),
+    stable_prefix_i(Scores, PartnerScores, N, I1)).
 
-stable_prefix(Preferences, Partners, I, J) :-
+%stable_prefix_ij(+Scores, ?PartnerScores, +I, +J)
+stable_prefix_ij(Scores, PartnerScores, I, J) :-
   (J == 0
   ; J > 0 ->
+    stable_pair(Scores, PartnerScores, I, J),
     J1 is J - 1,
-    stable_pair(Preferences, Partners, I, J),
-    stable_prefix(Preferences, Partners, I, J1)).
+    stable_prefix_ij(Scores, PartnerScores, I, J1)).
 
-%stable_pair(+Preferences, ?Partners, +I, +J)
-stable_pair(Preferences, Partners, I, J) :-
-  (prefers_partner_to_other(Preferences, Partners, I, J)
-  ; prefers_partner_to_other(Preferences, Partners, J, I)).
+%stable_pair(+Scores, ?PartnerScores, +I, +J)
+stable_pair(Scores, PartnerScores, I, J) :-
+  nth1(I, Scores, ScoreI), %ScoreI: auxiliary
+  nth1(J, Scores, ScoreJ), %ScoreJ: auxiliary
+  nth1(J, ScoreI, ScoreIJ), %ScoreIJ: constant
+  nth1(I, ScoreJ, ScoreJI), %ScoreJI: constant
+  nth1(I, PartnerScores, ScoreIP), %ScoreIP: CP variable
+  nth1(J, PartnerScores, ScoreJP), %ScoreJP: CP variable
+  ScoreIP #=< ScoreIJ #\/ ScoreJP #=< ScoreJI. %Constrain!
+make_scores(Preferences, Scores) :-
+  length(Preferences, N),
+  make_scores(Preferences, Scores, N).
 
-%prefers_partner_to_other(+Preferences, +Partners, ?Judge, +Other)
-prefers_partner_to_other(Preferences, Partners, Judge, Other) :-
-  nth1(Judge, Preferences, Preference),
-  element(Judge, Partners, Partner),
-  prefers(Preference, Partner, Other).
+:- begin_tests(make_scores).
+test(kleinberg_2,
+    [all(Scores == [[[4,4,1,2],[4,4,2,1],[2,1,4,4],[1,2,4,4]]])]) :-
+  make_scores([[3,4],[4,3],[2,1],[1,2]], Scores).
+:- end_tests(make_scores).
 
-:- begin_tests(prefers_partner_to_other).
-test(true, [true]) :- prefers_partner_to_other([[2,1], _], [2,_], 1, 1).
-test(fail, [fail]) :- prefers_partner_to_other([[1,2], _], [2,_], 1, 1).
-test(generate_judge, [all(Judge == [1,2])]) :-
-  prefers_partner_to_other([[2,1,3], [1,2,3], [1,2,3]], [2,1,3], Judge, 1).
-:- end_tests(prefers_partner_to_other).
+make_scores([], [], _N).
+make_scores([PH|PT], [SH|ST], N) :-
+  make_score(PH, SH, N, N),
+  make_scores(PT, ST, N).
 
-%prefers(+Preference, ?Good, +Bad)
-prefers([H|T], Good, Bad) :-
-  (H = Good
-  ; H \== Bad -> prefers(T, Good, Bad)).
+%make_score(+Preference, -Score, +Length, +Padding)
+make_score(Preference, Score, Length, Padding) :-
+  length(Score, Length),
+  make_score1(Preference, Score, 1, Padding).
 
-:- begin_tests(prefers).
-test(empty_same, [fail]) :- prefers([], 1, 1).
-test(empty_diff, [fail]) :- prefers([], 1, 2).
-test(full_diff_true, [true]) :- prefers([1,2], 1, 2).
-test(full_diff_fail, [fail]) :- prefers([1,2], 2, 1).
-test(full_same, [true]) :- prefers([1,2], 1, 1).
-test(generate_good, [all(Good == [1,2])]) :- prefers([1,2,_], Good, 2).
-:- end_tests(prefers).
+make_score1(_Preference, [], _I, _Padding).
+make_score1(Preference, [SH|ST], I, Padding) :-
+  nth1(SH, Preference, I),
+  I1 is I + 1,
+  make_score1(Preference, ST, I1, Padding).
+make_score1(Preference, [SH|ST], I, Padding) :-
+  \+ member(I, Preference),
+  SH = Padding,
+  I1 is I + 1,
+  make_score1(Preference, ST, I1, Padding).
