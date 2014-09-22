@@ -1,15 +1,9 @@
 /*
 File: srp.pl
+
+This file defines the main predicates used for solving the stable roommates
+problem.
 */
-
-%Stable roommates problem solver
-%Find a stable perfect matching on participants with given preferences.
-
-%Problem definition:
-%http://en.wikipedia.org/wiki/Stable_roommates_problem
-
-%Entry point:
-%srp/2
 
 :- use_module(library(clpfd), all).
 
@@ -25,14 +19,18 @@ File: srp.pl
 
 /*
 Predicate: srp/2
+Solves an instance of stable roommates problem or validates its solution.
 
-srp(+Preferences:list, -Partners:list) is nondet.
-
-srp(+Preferences:list, +Partners:list) is semidet.
+> srp(+Preferences:list, -Partners:list) is nondet.
+> srp(+Preferences:list, +Partners:list) is semidet.
 
 Arguments:
-Preferences - List of lists of participants ordered according to desirability
-Partners - Assignment of partners
+Preferences - List of preference lists, one for each of the participants.
+A preference list orders a subset of
+participants without repetitions. A participant is identified by an integer
+between 1 and N, where N is the number of participants.
+Partners - Assignment of partners. _i_-th member of Partners is the partner
+assigned to _i_-th participant.
 
 See also:
 <srp/3>
@@ -44,13 +42,15 @@ srp(Preferences, Partners) :-
 
 /*
 Predicate: srp/3
+Solves an instance of stable roommates problem using specified options for
+_clpfd:labeling/2_.
 
-srp(+Preferences:list, -Partners:list, :Options:list) is nondet.
+> srp(+Preferences:list, -Partners:list, :Options:list) is nondet.
 
 Arguments:
 Preferences - List of lists of participants ordered according to desirability
 Partners - Assignment of partners
-Options - Options list for _clpfd:labeling/2_
+Options - Options for _clpfd:labeling/2_
 */
 
 srp(Preferences, Partners, Options) :-
@@ -116,17 +116,17 @@ members([EH|ET], [LH|LT]) :-
 
 /*
 Predicate: srp_scores/3
+Assigns partners so that all the constraints hold according to given scores.
 
-Watch out: constraint magic inbound!
+Uses constraint programming.
 
-srp_scores(+Scores:list, +Partners:list, :Options:list) is semidet.
-
-srp_scores(+Scores:list, -Partners:list, :Options:list) is nondet.
+> srp_scores(+Scores:list, +Partners:list, :Options:list) is semidet.
+> srp_scores(+Scores:list, -Partners:list, :Options:list) is nondet.
 
 Arguments:
 Scores - List of lists of scores
 Partners - Assignment of partners
-Options - Options list for _clpfd:labeling/2_
+Options - Options for _clpfd:labeling/2_
 */
 
 srp_scores(Scores, Partners, Options) :-
@@ -181,12 +181,13 @@ stable_pair(Scores, PartnerScores, I, J) :-
 
 /*
 Predicate: make_scores/2
+Converts _Preferences_ to _Scores_.
 
-make_scores(+Preferences:list, -Scores:list) is det.
+> make_scores(+Preferences:list, -Scores:list) is det.
 
 Arguments:
 Preferences - List of lists of candidates ordered by desirability
-Scores - List of lists of scores
+Scores - List of lists of scores. Compatible with <srp_scores/3>.
 */
 
 make_scores(Preferences, Scores) :-

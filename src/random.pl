@@ -13,8 +13,9 @@ To reset the randomness seed, execute the following goal:
 
 /*
 Predicate: random_preferences/2
+Generates random instance of stable roommates problem of a given size.
 
-random_preferences(+N:int, -Preferences:list) is det.
+> random_preferences(+N:int, -Preferences:list) is det.
 
 Arguments:
 N - Number of participants
