@@ -127,10 +127,10 @@ Options - Options list for _clpfd:labeling/2_
 srp_scores(Scores, Partners, Options) :-
   length(Scores, N),
   length(Partners, N),
-  domain(Partners, 1, N),
-  assignment(Partners, Partners),
+  domain(Partners, 1, N), %Partners is a list of N domain variables
+  assignment(Partners, Partners), %Constrain Partners
   length(PartnerScores, N),
-  domain(PartnerScores, 1, N),
+  domain(PartnerScores, 1, N), %PartnerScores is a list of N domain variables
   elements(Partners, Scores, PartnerScores), %Bind Partners and PartnerScores
   stable_prefix_i(Scores, PartnerScores, N, N), %Constrain PartnerScores
   labeling(Options, Partners).
