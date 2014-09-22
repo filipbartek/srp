@@ -4,7 +4,7 @@ File: random.pl
 The predicates defined in this file use randomness from library _random_.
 To reset the randomness seed, execute the following goal:
 
-> :- random:setrand(0).
+> random:setrand(0).
 */
 
 :- use_module(library(random), [
