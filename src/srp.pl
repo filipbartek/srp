@@ -122,10 +122,6 @@ Arguments:
 Scores - List of lists of scores
 Partners - Assignment of partners
 K - Number of assumptions made in labeling procedure
-
-Lower score signifies more desired candidate partner
-Equal score signifies undistinguishable candidate partner
-Each participant must assign every participant a score
 */
 
 srp_scores(Scores, Partners, K) :-
