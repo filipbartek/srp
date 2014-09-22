@@ -14,9 +14,6 @@ Note especially that the solver isn't able to find imperfect matchings.
 ## Tools
 
 * [SICStus Prolog](https://sicstus.sics.se/) 4.2.3
-  * lists
-  * clpfd
-  * plunit
 * [NaturalDocs](http://www.naturaldocs.org/) 1.52
 
 ## Usage
