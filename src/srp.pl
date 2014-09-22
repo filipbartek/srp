@@ -36,23 +36,23 @@ Partners - Assignment of partners
 */
 
 srp(Preferences, Partners) :-
-  srp(Preferences, Partners, _K).
+  srp(Preferences, Partners, []).
 
 
 /*
 Predicate: srp/3
 
-srp(+Preferences:list, -Partners:list, -K:int) is nondet.
+srp(+Preferences:list, -Partners:list, :Options:list) is nondet.
 
 Arguments:
 Preferences - List of lists of participants ordered according to desirability
 Partners - Assignment of partners
-K - Unified with the number of choices made in search for the assignment
+Options - Options list for _clpfd:labeling/2_
 */
 
-srp(Preferences, Partners, K) :-
+srp(Preferences, Partners, Options) :-
   make_scores(Preferences, Scores),
-  srp_scores(Scores, Partners, K),
+  srp_scores(Scores, Partners, Options),
   members(Partners, Preferences).
 
 :- begin_tests(srp).
@@ -114,17 +114,17 @@ members([EH|ET], [LH|LT]) :-
 /*
 Predicate: srp_scores/3
 
-srp_scores(+Scores:list, +Partners:list, +K:int) is semidet.
+srp_scores(+Scores:list, +Partners:list, :Options:list) is semidet.
 
-srp_scores(+Scores:list, -Partners:list, -K:int) is nondet.
+srp_scores(+Scores:list, -Partners:list, :Options:list) is nondet.
 
 Arguments:
 Scores - List of lists of scores
 Partners - Assignment of partners
-K - Number of assumptions made in labeling procedure
+Options - Options list for _clpfd:labeling/2_
 */
 
-srp_scores(Scores, Partners, K) :-
+srp_scores(Scores, Partners, Options) :-
   length(Scores, N),
   length(Partners, N),
   domain(Partners, 1, N),
@@ -133,11 +133,11 @@ srp_scores(Scores, Partners, K) :-
   domain(PartnerScores, 1, N),
   elements(Partners, Scores, PartnerScores), %Bind Partners and PartnerScores
   stable_prefix_i(Scores, PartnerScores, N, N), %Constrain PartnerScores
-  labeling([assumptions(K)], Partners).
+  labeling(Options, Partners).
 
 :- begin_tests(srp_scores).
 test(kleinberg_2, [all(Partners == [[3,4,1,2], [4,3,2,1]])]) :-
-  srp_scores([[4,4,1,2],[4,4,2,1],[2,1,4,4],[1,2,4,4]], Partners, _K).
+  srp_scores([[4,4,1,2],[4,4,2,1],[2,1,4,4],[1,2,4,4]], Partners, []).
 :- end_tests(srp_scores).
 
 
