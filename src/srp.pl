@@ -1,3 +1,7 @@
+/*
+File: srp.pl
+*/
+
 %Stable roommates problem solver
 %Find a stable perfect matching on participants with given preferences.
 
