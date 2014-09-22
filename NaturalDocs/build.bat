@@ -26,7 +26,8 @@ pushd %NATURALDOCS%
 NaturalDocs^
  --input "%INPUT_ABS%"^
  --output HTML "%OUTPUT_ABS%"^
- --project "%PROJECT_ABS%"
+ --project "%PROJECT_ABS%"^
+ --tab-length 2
 popd
 
 endlocal
