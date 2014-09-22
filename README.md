@@ -17,6 +17,7 @@ Note especially that the solver isn't able to find imperfect matchings.
   * lists
   * clpfd
   * plunit
+* [NaturalDocs](http://www.naturaldocs.org/) 1.52
 
 ## Usage
 
