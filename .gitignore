@@ -1,0 +1,6 @@
+# NaturalDocs
+/NaturalDocs/output/
+/NaturalDocs/project/**
+!/NaturalDocs/project/Languages.txt
+!/NaturalDocs/project/Menu.txt
+!/NaturalDocs/project/Topics.txt
