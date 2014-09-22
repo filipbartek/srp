@@ -21,11 +21,15 @@
 
 %srp(+Preferences, ?Partners)
 srp(Preferences, Partners) :-
+  srp(Preferences, Partners, _K).
+
+%srp(+Preferences, ?Partners, ?K)
+srp(Preferences, Partners, K) :-
   length(Preferences, N),
   length(Partners, N),
   assignment(Partners, Partners),
   stable(Preferences, Partners),
-  labeling([], Partners).
+  labeling([assumptions(K)], Partners).
 
 :- begin_tests(srp).
 
