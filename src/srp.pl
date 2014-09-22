@@ -117,6 +117,8 @@ members([EH|ET], [LH|LT]) :-
 /*
 Predicate: srp_scores/3
 
+Watch out: constraint magic inbound!
+
 srp_scores(+Scores:list, +Partners:list, :Options:list) is semidet.
 
 srp_scores(+Scores:list, -Partners:list, :Options:list) is nondet.
