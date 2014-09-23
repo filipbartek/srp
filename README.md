@@ -1,13 +1,13 @@
 # srp
 
-Stable roommates problem solver
+_Stable roommates problem solver_
 
 This solver finds a stable matching (if such matching exists) for a given preference relation on a finite set of participants.
 
 The preference relation can be specified in one of two ways:
 
-* each participant has a list of potential partners ordered according to desirability
-* each participant assigns every participant a score
+* each participant has a list of potential partners ordered according to desirability or
+* each participant assigns every participant a score.
 
 ## Definitions
 
