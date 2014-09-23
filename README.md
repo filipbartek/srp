@@ -2,9 +2,12 @@
 
 Stable roommates problem solver
 
-This solver finds a perfect stable matching (if such matching exists) for a given set of lists of preferences (not necessarily complete).
+This solver finds a stable matching (if such matching exists) for a given preference relation on a finite set of participants.
 
-Note especially that the solver isn't able to find imperfect matchings.
+The preference relation can be specified in one of two ways:
+
+* each participant has a list of potential partners ordered according to desirability
+* each participant assigns every participant a score
 
 ## Definitions
 
