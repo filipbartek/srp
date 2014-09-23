@@ -13,17 +13,17 @@ The preference relation can be specified in one of two ways:
 
 ### Stable roommates problem
 
-Let each of _n_ participants linearly order all the other participants according to personal preferences.
+Let's assume we have _n_ participants. Each participant knows some of the participants, let's call these her potential partners. Each participant has a linear ordering of her potential partners according to preference.
 
-A matching is an equivalence relation on participants that has classes of size at most 2.
+Note that a participant may or may not consider herself a potential partner, i.e. the relation of potential partnership is not irreflexive.
 
-A perfect matching is a matching with classes of size exactly 2. In a perfect matching, every participant is assigned a partner.
+A matching is an equivalence relation on participants that has classes of size at most 2, i.e. assigns each participant one or none partner. Matching must assign a potential partner to each of the participants.
 
-An instability in a matching is a pair of participants each of whom prefers (according to their preference relation) the other to their current partner.
+An instability in a matching is a pair of participants each of whom prefers (according to their personal preference relations) the other to their current partner.
 
 A stable matching is a matching that doesn't admit an instability.
 
-(Source: [Wikipedia](http://en.wikipedia.org/wiki/Stable_roommates_problem))
+Further reading: [Wikipedia](http://en.wikipedia.org/wiki/Stable_roommates_problem)
 
 ## Tools
 
