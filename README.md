@@ -9,10 +9,21 @@ The preference relation can be specified in one of two ways:
 * each participant has a list of potential partners ordered according to desirability or
 * each participant assigns every participant a score.
 
-## Definitions
+## Problem definition
 
-* Stable matching: [Stable roommates problem - Wikipedia](http://en.wikipedia.org/wiki/Stable_roommates_problem)
-* Perfect matching: [Matching - Wikipedia](http://en.wikipedia.org/wiki/Matching_%28graph_theory%29#Definition)
+### Stable roommates problem
+
+Let each of _n_ participants linearly order all the other participants according to personal preferences.
+
+A matching is an equivalence relation on participants that has classes of size at most 2.
+
+A perfect matching is a matching with classes of size exactly 2. In a perfect matching, every participant is assigned a partner.
+
+An instability in a matching is a pair of participants each of whom prefers (according to their preference relation) the other to their current partner.
+
+A stable matching is a matching that doesn't admit an instability.
+
+(Source: [Wikipedia](http://en.wikipedia.org/wiki/Stable_roommates_problem))
 
 ## Tools
 
