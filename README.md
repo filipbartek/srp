@@ -23,7 +23,15 @@ An instability in a matching is a pair of participants each of whom prefers (acc
 
 A stable matching is a matching that doesn't admit an instability.
 
+In stable roommates problem, given preferences of each participant, the task is to find a stable matching.
+
 Further reading: [Wikipedia](http://en.wikipedia.org/wiki/Stable_roommates_problem)
+
+#### Perfect matching
+
+A perfect matching is a matching in which every participant is assigned somebody else.
+
+Once we can solve general SRP, we can force a perfect matching by making sure that no participant considers herself a potential partner.
 
 ## Tools
 
