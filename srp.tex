@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{hyperref}
+
+\begin{document}
+\title{Stable roommates problem solver}
+\author{Filip Bártek}
+\maketitle
+
+\section{Problem definition}
+
+Let's have $n$ participants.
+Each participant knows some of the participants,
+let's call these her potential partners.
+Each participant has a linear ordering of her potential partners according
+to preference.
+
+Note that a participant may or may not consider herself a potential partner,
+i.e. the relation of potential partnership needn't be irreflexive.
+
+A matching is an equivalence relation on participants that has classes of size
+at most 2,
+i.e. assigns each participant one or none partner.
+Matching must assign a potential partner to each of the participants.
+
+An instability in a matching is a pair of participants each of whom prefers (according to their personal preference relations) the other to their current partner.
+
+A stable matching is a matching that doesn't admit an instability.
+
+In stable roommates problem, given preferences of each participant,
+the task is to find a stable matching.
+
+\subsection{Perfect matching}
+A perfect matching is a matching in which every participant is assigned somebody else.
+
+Once we can solve general SRP,
+we can force a perfect matching by making sure that no participant considers herself
+a potential partner.
+
+\section{Constraint model}
+In this section we'll describe a model for SRP instance on $n$ participants.
+
+We'll use the symbol $N_n$ to denote the set $\{1, \ldots, n\}$.
+Each participant is uniquely identified by a number from $N_n$.
+
+Note that the choice of variables and constraints corresponds to the capabilities
+of \emph{clpfd}, a library that is used prominently in the implementation
+of the solver.
+
+\subsection{Variables}
+\paragraph{Problem instance}
+We'll represent an instance of SRP with $n$ participants as
+a collection of preference lists $P = (P_1, \ldots, P_n)$.
+$P_i$ is a preference list expressing preferences of participant $i$.
+It's a $k_i$-tuple of participant identifiers (i.e. numbers from $N_n$).
+All potential partners of participant $i$ are listed in $P_i$ in order of decreasing
+desirability without duplicities.
+
+\paragraph{Problem solution}
+$m: N \rightarrow N$ assigns each participant her partner.
+
+\paragraph{Auxiliary variables}
+Let $s$ be a score function.
+$s(i,j)$ represents how desirable participant $j$ is according to participant $i$.
+The lower the score, the more desirable participant $j$ is.
+
+$s$ is defined uniquely for a given instance $P$.
+For every participant $i$:
+
+\begin{itemize}
+\item $j$-th potential partner is assigned score $j$
+\item every participant which is not a potential partner is assigned a score $n$
+\end{itemize}
+
+As a convenience, let $\bar{s}(i)$ denote the score that participant $i$ assigns to her partner.
+
+\subsection{Constraints}
+Since the score function $s$ depends uniquely and trivially
+to the problem instance $P$,
+construction of $s$ from $P$ is realized
+using standard Prolog code (without the use of clpfd) and as such,
+I'll leave out formal definition of the corresponding constraint.
+
+Similarly, the properties of $P$ are not enforced formally so I'll leave out their
+formal definitions.
+Informal description of these properties are available in the previous section.
+
+The following constraints constrain the solution $m$ based on $P$ and $s$:
+
+\begin{tabular}{l | l}
+Constraint & Explanation \\
+\hline
+$\forall i. m(i) \in P_i$ & Matching satisfies potential partners \\
+$\forall i,j. m(i) = j \Leftrightarrow m(j) = i$ & Matching is symmetric \\
+$\forall i. \bar{s}(i) = s(i, m(i))$ & $\bar{s}$ corresponds to $s$ and $m$ \\
+$\forall i,j. \bar{s}(i) \leq s(i,j) \vee \bar{s}(j) \leq s(j,i)$ & All pairs are stable
+\end{tabular}
+
+Note especially the last of these constraints
+as it captures the essence of the problem, that is the requirement of stability.
+An instability occurs when a pair of participants prefer each other to their partners.
+The constraint ensures that in each pair of participants,
+at least one of them prefers her partner (i.e.~assigns her a lower score)
+to the other participant.
+
+\section{Implementation}
+I've implemented the constraint model introduced in the previous section
+using SICStus Prolog and its clpfd library.
+The implementation is available in the attached file \emph{srp.pl}.
+
+\subsection{Usage}
+The main entry point is the predicate srp/2.
+It's typical usage is srp(Preferences, Matching),
+where Preferences is a list of ordered lists of potential partners
+and Matching is unbound.
+If a solution of SRP instance described by Preferences exists,
+it is unified with Matching.
+Otherwise srp fails.
+
+\subsection{Performance}
+I've examined the performance of the solver using various problem instances
+(esp.~of various sizes) and search strategies.
+%TODO: Finish.
+
+\end{document}
