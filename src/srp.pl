@@ -54,9 +54,12 @@ Options - Options for _clpfd:labeling/2_
 */
 
 srp(Preferences, Partners, Options) :-
+  length(Preferences, N),
+  length(Partners, N),
+  domain(Partners, 1, N),
+  elements(_, Preferences, Partners),
   make_scores(Preferences, Scores),
-  srp_scores(Scores, Partners, Options),
-  members(Partners, Preferences).
+  srp_scores(Scores, Partners, Options).
 
 :- begin_tests(srp).
 
