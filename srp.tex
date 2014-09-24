@@ -130,6 +130,52 @@ Otherwise \code{srp} fails.
 \subsection{Performance}
 I've examined the performance of the solver using various problem instances
 (esp.~of various sizes) and search strategies.
+
+\subsubsection{System configuration}
+The measurements were performed on a computer with the following configuration:
+
+\begin{tabular}{| l | l |}
+\hline
+Model & HP Compaq 6510b \\
+\hline
+CPU & Intel Core2 Duo T8100 2.10 GHz \\
+\hline
+RAM & 2.50 GB \\
+\hline
+Operating system & Windows Vista Business 32-bit \\
+\hline
+SICStus Prolog & 4.2.3 \\
+\hline
+\end{tabular}
+
+\subsubsection{Problem instance generation}
+I ran the solver on randomly generated problem instances.
+For a given $n$, each of the participants' preference lists
+is a random permutation of $\nn$.
+Every possible permutation occurs with equal probability.
+
+\subsubsection{Measurement procedure}
+For every examined value of $n$, 10 random problem instances were generated.
+Each of these instances was solved using each of the three search strategies:
+
+\begin{itemize}
+\item leftmost
+\item ff
+\item ffc
+\end{itemize}
+
+Two measurements were performed: assumptions and time.
+%TODO: Clarify.
+
+In all cases, the solver was only run until it found the first solution.
+In cases the solver couldn't find any solution,
+no measurements were performed for that instance.
+
+For time measurement, the solver was run 100 times on each instance;
+the reported times are averages from these 100 executions.
+
+\subsubsection{Results}
+
 %TODO: Finish.
 
 \end{document}
