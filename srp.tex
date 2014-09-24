@@ -3,6 +3,9 @@
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 
+\usepackage{amsfonts} % mathbb
+\newcommand{\nn}{\mathbb{N}_n}
+
 \usepackage{hyperref}
 
 \begin{document}
@@ -43,8 +46,8 @@ a potential partner.
 \section{Constraint model}
 In this section we'll describe a model for SRP instance on $n$ participants.
 
-We'll use the symbol $N_n$ to denote the set $\{1, \ldots, n\}$.
-Each participant is uniquely identified by a number from $N_n$.
+We'll use the symbol $\nn$ to denote the set $\{1, \ldots, n\}$.
+Each participant is uniquely identified by a number from $\nn$.
 
 Note that the choice of variables and constraints corresponds to the capabilities
 of \emph{clpfd}, a library that is used prominently in the implementation
@@ -55,12 +58,12 @@ of the solver.
 We'll represent an instance of SRP with $n$ participants as
 a collection of preference lists $P = (P_1, \ldots, P_n)$.
 $P_i$ is a preference list expressing preferences of participant $i$.
-It's a $k_i$-tuple of participant identifiers (i.e. numbers from $N_n$).
+It's a $k_i$-tuple of participant identifiers (i.e. numbers from $\nn$).
 All potential partners of participant $i$ are listed in $P_i$ in order of decreasing
 desirability without duplicities.
 
 \paragraph{Problem solution}
-$m: N \rightarrow N$ assigns each participant her partner.
+$m: \nn \rightarrow \nn$ assigns each participant her partner.
 
 \paragraph{Auxiliary variables}
 Let $s$ be a score function.
