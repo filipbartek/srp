@@ -23,7 +23,7 @@ Preferences - List of permutations of participant indices,
 each ranging from 1 to N
 
 Example of usage:
-> random:setrand(0), generate_preferences(64, Preferences), srp(Preferences, Partners).
+> random:setrand(0), random_preferences(64, Preferences), srp(Preferences, Partners).
 */
 
 random_preferences(N, Preferences) :-
@@ -33,8 +33,8 @@ random_preferences(N, Preferences) :-
 %random_preferences1(+N, ?Preferences)
 random_preferences1(_N, []).
 random_preferences1(N, [H|T]) :-
-  generate_preference(N, H),
-  generate_preferences1(N, T).
+  random_preference(N, H),
+  random_preferences1(N, T).
 
 %random_preference(+N, -Preference)
 random_preference(N, Preference) :-
