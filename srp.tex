@@ -6,6 +6,7 @@
 \usepackage{amsfonts} % mathbb
 \newcommand{\nn}{\mathbb{N}_n}
 
+\newcommand{\file}[1]{\texttt{#1}}
 \newcommand{\clpfd}{\texttt{clpfd}}
 
 \usepackage{hyperref}
@@ -114,7 +115,7 @@ to the other participant.
 \section{Implementation}
 I've implemented the constraint model introduced in the previous section
 using SICStus Prolog and its \clpfd{} library.
-The implementation is available in the attached file \emph{srp.pl}.
+The implementation is available in the attached file \file{srp.pl}.
 
 \subsection{Usage}
 The main entry point is the predicate srp/2.
