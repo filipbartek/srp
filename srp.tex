@@ -7,6 +7,7 @@
 \newcommand{\nn}{\mathbb{N}_n}
 
 \newcommand{\file}[1]{\texttt{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\clpfd}{\texttt{clpfd}}
 
 \usepackage{hyperref}
@@ -118,13 +119,13 @@ using SICStus Prolog and its \clpfd{} library.
 The implementation is available in the attached file \file{srp.pl}.
 
 \subsection{Usage}
-The main entry point is the predicate srp/2.
-It's typical usage is srp(Preferences, Matching),
-where Preferences is a list of ordered lists of potential partners
-and Matching is unbound.
-If a solution of SRP instance described by Preferences exists,
-it is unified with Matching.
-Otherwise srp fails.
+The main entry point is the predicate \code{srp/2}.
+It's typical usage is \code{srp(Preferences, Matching)},
+where \code{Preferences} is a list of ordered lists of potential partners
+and \code{Matching} is unbound.
+If a solution of SRP instance described by \code{Preferences} exists,
+it is unified with \code{Matching}.
+Otherwise \code{srp} fails.
 
 \subsection{Performance}
 I've examined the performance of the solver using various problem instances
