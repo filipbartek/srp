@@ -8,7 +8,8 @@ problem.
 :- use_module(library(clpfd), all).
 
 :- use_module(library(lists), [
-  nth1/3
+  nth1/3,
+  permutation/2
 ]).
 
 :- use_module(library(plunit), [
@@ -87,9 +88,8 @@ test(wiki_6, [true(Partners == [6,4,5,2,3,1])]) :-
     [5,1,3,4,2]], Partners).
 
 %Source: http://en.wikipedia.org/wiki/File:Gale-Shapley.gif
-test(wiki_marriages, [fixme('Generates an unexpected solution'),
-    true(Partners == [5,8,7,6,1,4,3,2])]) :-
-  srp([
+test(wiki_marriages, [true]) :-
+  Preferences = [
     [5,7,6,8],
     [7,8,5,6],
     [8,6,7,5],
@@ -97,7 +97,10 @@ test(wiki_marriages, [fixme('Generates an unexpected solution'),
     [2,1,3,4],
     [4,1,2,3],
     [1,3,2,4],
-    [2,3,1,4]], Partners).
+    [2,3,1,4]],
+  SolutionsExpected = [[5,8,7,6,1,4,3,2], [5,7,8,6,1,4,2,3]],
+  findall(Partners, srp(Preferences, Partners), SolutionsActual),
+  permutation(SolutionsExpected, SolutionsActual).
 
 %Source: Tardos, Kleinberg: Stable matchings
 test(kleinberg_1, [true(Partners == [3,4,1,2])]) :-
