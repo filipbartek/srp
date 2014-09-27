@@ -17,6 +17,10 @@
 % http://tex.stackexchange.com/a/93770
 \usepackage{datatool}
 
+% http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics
+\usepackage{graphicx}
+\graphicspath{ {./graphics/} }
+
 \usepackage{hyperref}
 
 \usepackage{glossaries}
@@ -214,6 +218,18 @@ In cases the solver couldn't find any solution,
 no measurements were performed for that instance.
 
 \subsubsection{Results}
+
+\includegraphics[width=\linewidth]{executions}
+
+\includegraphics[width=\linewidth]{solvable}
+
+\includegraphics[width=\linewidth]{time}
+
+\includegraphics[width=\linewidth]{assumptions}
+
+\includegraphics[width=\linewidth]{leftmost_time}
+
+\includegraphics[width=\linewidth]{leftmost_assumptions}
 
 %TODO: Finish.
 

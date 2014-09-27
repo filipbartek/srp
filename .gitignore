@@ -1,6 +1,6 @@
 # LaTeX
 *.synctex.gz
-*.pdf
+/*.pdf
 *.log
 *.aux
 *.out
