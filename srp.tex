@@ -266,7 +266,31 @@ in figure \ref{fig:leftmost-time}.
 \label{fig:leftmost-time}
 \end{figure}
 
+The average numbers of assumptions made in the search for the first solution
+are shown in figure \ref{fig:assumptions}.
+The averages run across up to 10 random instances of a given size.
+
+Note that the numbers happen to be equal for strategies \code{ff} and \code{ffc}
+(on an instance-to-instance basis, not only the averages).
+%TODO: Explain.
+
+In the chart you can see that the number of assumptions rises with instance size
+and rises more quickly for the strategy \code{leftmost}.
+This is to be expected since \code{ff} and \code{ffc} use more elaborate heuristics
+for lowering the expected number of assumptions.
+However, it seems that the numbers of assumptions don't propagate in running times
+(cf.~figure \ref{fig:time}).
+A possible explanation is that the time saved by lowering number of assumptions
+is consumed by the overhead of the more expensive heuristics
+of \code{ff} and \code{ffc}.
+Further analysis would be required to determine the exact cause.
+
+\begin{figure}
+\centering
 \includegraphics[width=\linewidth]{assumptions}
+\caption{Number of assumptions}
+\label{fig:assumptions}
+\end{figure}
 
 \includegraphics[width=\linewidth]{leftmost_assumptions}
 
