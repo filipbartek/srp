@@ -42,6 +42,7 @@ Timestamp: Updated yyyy-mm-dd
 
 Index: Everything
 File Index: File Index
+File: performance.pl  (performance.pl)
 Predicate Index: Predicate Index
 File: random.pl  (random.pl)
 File: srp.pl  (srp.pl)
