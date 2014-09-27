@@ -11,6 +11,7 @@
 \newcommand{\clpfd}{\texttt{clpfd}}
 \newcommand{\prolog}{Prolog}
 \newcommand{\sicstusprolog}{SICStus \prolog{}}
+\newcommand{\srp}{\acrshort{srp}}
 
 % Required by glossaries
 % http://tex.stackexchange.com/a/93770
@@ -19,9 +20,10 @@
 \usepackage{hyperref}
 
 \usepackage{glossaries}
+\newacronym{srp}{SRP}{stable roommates problem}
 \makeglossaries
 \begin{document}
-\title{Stable roommates problem solver}
+\title{\Acrlong{srp} solver}
 \author{Filip Bártek}
 \maketitle
 
@@ -45,18 +47,18 @@ An instability in a matching is a pair of participants each of whom prefers (acc
 
 A stable matching is a matching that doesn't admit an instability.
 
-In stable roommates problem, given preferences of each participant,
+In \acrfull{srp}, given preferences of each participant,
 the task is to find a stable matching.
 
 \subsection{Perfect matching}
 A perfect matching is a matching in which every participant is assigned somebody else.
 
-Once we can solve general SRP,
+Once we can solve general \srp{},
 we can force a perfect matching by making sure that no participant considers herself
 a potential partner.
 
 \section{Constraint model}
-In this section we'll describe a model for SRP instance on $n$ participants.
+In this section we'll describe a model for \srp{} instance on $n$ participants.
 
 We'll use the symbol $\nn$ to denote the set $\{1, \ldots, n\}$.
 Each participant is uniquely identified by a number from $\nn$.
@@ -67,7 +69,7 @@ of the solver.
 
 \subsection{Variables}
 \paragraph{Problem instance}
-We'll represent an instance of SRP with $n$ participants as
+We'll represent an instance of \srp{} with $n$ participants as
 a collection of preference lists $P = (P_1, \ldots, P_n)$.
 $P_i$ is a preference list expressing preferences of participant $i$.
 It's a $k_i$-tuple of participant identifiers (i.e. numbers from $\nn$).
@@ -131,7 +133,7 @@ The main entry point is the predicate \code{srp/2}.
 It's typical usage is \code{srp(Preferences, Matching)},
 where \code{Preferences} is a list of ordered lists of potential partners
 and \code{Matching} is unbound.
-If a solution of SRP instance described by \code{Preferences} exists,
+If a solution of \srp{} instance described by \code{Preferences} exists,
 it is unified with \code{Matching}.
 Otherwise \code{srp} fails.
 
