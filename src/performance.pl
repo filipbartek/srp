@@ -3,7 +3,9 @@ File: performance.pl
 This file defines tools for measuring performance of <srp/3>.
 
 Example of usage:
-> make_instances([0,1,2,4,8,16], [0,1,2,3,4,5,6,7,8,9], _Instances), measure(_Instances, 10, _Results), write_results(user_output, _Results).
+> make_instances([0,1,2,4,8,16], [0,1,2,3,4,5,6,7,8,9], _Instances),
+> measure(_Instances, 10, _Results),
+> write_results(user_output, _Results).
 */
 
 :- use_module(library(random), [
