@@ -141,6 +141,13 @@ If a solution of \srp{} instance described by \code{Preferences} exists,
 it is unified with \code{Matching}.
 Otherwise \code{srp} fails.
 
+Internally, \code{srp} uses \clpfd{} library to search for the solution.
+The searching procedure executed by \code{clpfd:labeling/2}
+can optionally be customized by passing a list of options in its first argument.
+This argument of \code{labeling} is exposed
+in the third argument of the extended \code{srp/3}.
+For example, one may execute \code{srp(Preferences, Matching, [ffc, assumptions(K)])}.
+
 \subsection{Correctness}
 Correctness of the program was assessed using a set of tests on small
 manually constructed and solved \srp{} instances (up to size 8).
