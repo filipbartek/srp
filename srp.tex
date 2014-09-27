@@ -12,8 +12,14 @@
 \newcommand{\prolog}{Prolog}
 \newcommand{\sicstusprolog}{SICStus \prolog{}}
 
+% Required by glossaries
+% http://tex.stackexchange.com/a/93770
+\usepackage{datatool}
+
 \usepackage{hyperref}
 
+\usepackage{glossaries}
+\makeglossaries
 \begin{document}
 \title{Stable roommates problem solver}
 \author{Filip Bártek}
@@ -179,5 +185,7 @@ the reported times are averages from these 100 executions.
 \subsubsection{Results}
 
 %TODO: Finish.
+
+\printglossaries{}
 
 \end{document}
