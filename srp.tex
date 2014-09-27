@@ -9,6 +9,8 @@
 \newcommand{\file}[1]{\texttt{#1}}
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\clpfd}{\texttt{clpfd}}
+\newcommand{\prolog}{Prolog}
+\newcommand{\sicstusprolog}{SICStus \prolog{}}
 
 \usepackage{hyperref}
 
@@ -88,7 +90,7 @@ As a convenience, let $\bar{s}(i)$ denote the score that participant $i$ assigns
 Since the score function $s$ depends uniquely and trivially
 to the problem instance $P$,
 construction of $s$ from $P$ is realized
-using standard Prolog code (without the use of \clpfd{}) and as such,
+using standard \prolog{} code (without the use of \clpfd{}) and as such,
 I'll leave out formal definition of the corresponding constraint.
 
 Similarly, the properties of $P$ are not enforced formally so I'll leave out their
@@ -115,7 +117,7 @@ to the other participant.
 
 \section{Implementation}
 I've implemented the constraint model introduced in the previous section
-using SICStus Prolog and its \clpfd{} library.
+using \sicstusprolog{} and its \clpfd{} library.
 The implementation is available in the attached file \file{srp.pl}.
 
 \subsection{Usage}
@@ -144,7 +146,7 @@ RAM & 2.50 GB \\
 \hline
 Operating system & Windows Vista Business 32-bit \\
 \hline
-SICStus Prolog & 4.2.3 \\
+\sicstusprolog{} & 4.2.3 \\
 \hline
 \end{tabular}
 
