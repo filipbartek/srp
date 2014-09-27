@@ -209,9 +209,18 @@ and \emph{number of assumptions taken in finding the first solution}.
 
 Time was measured using \sicstusprolog{} built-in predicate \code{statistics/2}
 with keyword \code{runtime}.
-%TODO: Verify.
-The solving procedure was repeated 100 times on each instance;
-the reported times are averages from these 100 executions.
+The solving procedure was repeated
+100 times on instances of size at most 16 and
+10 times on instances of size between 24 and 64
+(see figure \ref{fig:executions}).
+The reported times are averages from these executions.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{executions}
+\caption{Number of executions of solver for time measurement}
+\label{fig:executions}
+\end{figure}
 
 Assumptions are the choices made by \code{clpfd:labeling/2} during the search for
 a solution.
@@ -223,8 +232,6 @@ In cases the solver couldn't find any solution,
 no measurements were performed for that instance.
 
 \subsubsection{Results}
-
-\includegraphics[width=\linewidth]{executions}
 
 \includegraphics[width=\linewidth]{solvable}
 
