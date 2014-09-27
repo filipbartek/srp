@@ -1,5 +1,12 @@
+# LaTeX
 *.synctex.gz
 *.pdf
 *.log
 *.aux
 *.out
+
+# glossaries
+*.ist
+*.glo
+*.glg
+*.gls
