@@ -139,6 +139,13 @@ If a solution of \srp{} instance described by \code{Preferences} exists,
 it is unified with \code{Matching}.
 Otherwise \code{srp} fails.
 
+\subsection{Correctness}
+Correctness of the program was assessed using a set of tests on small
+manually constructed and solved \srp{} instances (up to size 8).
+
+The tests are bundled in the source file \file{srp.pl}
+and can be accessed using \code{plunit} library interface.
+
 \subsection{Performance}
 I've examined the performance of the solver using various problem instances
 (esp.~of various sizes) and search strategies.
