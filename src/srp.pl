@@ -107,8 +107,11 @@ test(kleinberg_1, [true(Partners == [3,4,1,2])]) :-
   srp([[3,4],[3,4],[1,2],[1,2]], Partners).
 
 %Source: Tardos, Kleinberg: Stable matchings
-test(kleinberg_2, [all(Partners == [[3,4,1,2], [4,3,2,1]])]) :-
-  srp([[3,4],[4,3],[2,1],[1,2]], Partners).
+test(kleinberg_2, [true]) :-
+  Preferences = [[3,4],[4,3],[2,1],[1,2]],
+  SolutionsExpected = [[3,4,1,2], [4,3,2,1]],
+  findall(Partners, srp(Preferences, Partners), SolutionsActual),
+  permutation(SolutionsExpected, SolutionsActual).
 
 :- end_tests(srp).
 
