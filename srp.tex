@@ -194,6 +194,13 @@ such that every possible permutation occurs with equal probability.
 The following instance sizes (values of $n$) were examined:
 0, 1, 2, 4, 8, 16, 24, 32, 40, 48 and 64.
 
+I seem to have hit a wall in running time with an instance of size 128
+so I resorted to focusing on smaller instances.
+The steep rise of running time could have been caused by a cache overflow
+or by inherent inefficiency of the solver.
+Note that \srp{} was shown to be soluble
+in quadratic time.\footnote{Source: Wikipedia - Stable roommates problem}
+
 For every examined value of $n$, 10 random instances were generated.
 Each of these instances was solved using each of the three relevant basic
 search strategies offered by \code{clpfd:labeling/2}:
