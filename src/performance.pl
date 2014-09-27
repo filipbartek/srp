@@ -7,8 +7,7 @@ Example of usage:
 */
 
 :- use_module(library(random), [
-  setrand/1,
-  random_permutation/2
+  setrand/1
 ]).
 
 write_results(_Stream, []).
