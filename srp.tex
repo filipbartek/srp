@@ -195,15 +195,23 @@ search strategies offered by \code{clpfd:labeling/2}:
 \item \code{ffc} (most constrained).
 \end{itemize}
 
-Two measurements were performed: assumptions and time.
-%TODO: Clarify.
+Two measurements were performed: \emph{time to find a solution}
+and \emph{number of assumptions}.
+
+Time was measured using \sicstusprolog{} built-in predicate \code{statistics/2}
+with keyword \code{runtime}.
+%TODO: Verify.
+The solving procedure was repeated 100 times on each instance;
+the reported times are averages from these 100 executions.
+
+Assumptions are the choices made by \code{clpfd:labeling/2} during the search for
+a solution.
+Their number is extracted from the search procedure using the option
+\code{assumptions(K)}.
 
 In all cases, the solver was only run until it found the first solution.
 In cases the solver couldn't find any solution,
 no measurements were performed for that instance.
-
-For time measurement, the solver was run 100 times on each instance;
-the reported times are averages from these 100 executions.
 
 \subsubsection{Results}
 
