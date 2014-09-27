@@ -134,7 +134,8 @@ The implementation is available in the attached file \file{srp.pl}.
 \subsection{Usage}
 The main entry point is the predicate \code{srp/2}.
 Its typical usage is \code{srp(Preferences, Matching)},
-where \code{Preferences} is a list of ordered lists of potential partners
+where \code{Preferences} is a fully instantiated list of ordered lists
+of potential partners
 and \code{Matching} is unbound.
 If a solution of \srp{} instance described by \code{Preferences} exists,
 it is unified with \code{Matching}.
