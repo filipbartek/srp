@@ -40,3 +40,33 @@ random_preferences1(N, [H|T]) :-
 random_preference(N, Preference) :-
   range(N, Range),
   random_permutation(Range, Preference).
+
+%range(+N, ?List)
+range(N, List) :-
+  N >= 0,
+  N1 is N + 1,
+  range(1, N1, List).
+
+:- begin_tests(range_2).
+test(n0, [true]) :- range(0, []).
+test(n1, [true]) :- range(1, [1]).
+test(n2, [true]) :- range(2, [1,2]).
+test(generate_list_n0, [true(List == [])]) :- range(0, List).
+test(generate_list_n1, [true(List == [1])]) :- range(1, List).
+test(generate_list_n2, [true(List == [1,2])]) :- range(2, List).
+:- end_tests(range_2).
+
+%range(+Begin, +End, ?List)
+range(Begin, End, List) :-
+  (Begin == End -> List = []
+  ; Begin < End ->
+    Begin1 is Begin + 1,
+    range(Begin1, End, Rest),
+    List = [Begin|Rest]).
+
+:- begin_tests(range_3).
+test(generate_list_0_0, [true(List == [])]) :- range(0, 0, List).
+test(generate_list_0_1, [true(List == [0])]) :- range(0, 1, List).
+test(generate_list_1_2, [true(List == [1])]) :- range(1, 2, List).
+test(generate_list_1_3, [true(List == [1,2])]) :- range(1, 3, List).
+:- end_tests(range_3).
