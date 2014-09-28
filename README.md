@@ -36,7 +36,11 @@ Once we can solve general SRP, we can force a perfect matching by making sure th
 ## Tools
 
 * [SICStus Prolog](https://sicstus.sics.se/) 4.2.3
+  * Solver uses libraries `lists` and `clpfd`
+  * Tests use library `plunit`
+  * Performance measurement uses library `random`
 * [NaturalDocs](http://www.naturaldocs.org/) 1.52
+  * Only required for generating documentation
 
 ## Usage
 
