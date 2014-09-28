@@ -67,7 +67,7 @@ make_instances1(Size, [Seed|Seeds], [Instance|Instances]) :-
 
 /*
 Predicate: make_instance/3
-Generates a random instance of SRP.
+Generates a random instance of SRP with an identifier.
 
 > make_instance(+Size:int, +Seed:int, -Instance:list) is det.
 
