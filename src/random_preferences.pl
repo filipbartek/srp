@@ -35,6 +35,11 @@ random_preferences(N, Preferences) :-
   length(Preferences, N),
   random_preferences1(N, Preferences).
 
+:- begin_tests(random_preferences_2).
+test(n0, [true(Preferences == [])]) :- random_preferences(0, Preferences).
+test(n1, [true(Preferences == [[1]])]) :- random_preferences(1, Preferences).
+:- end_tests(random_preferences_2).
+
 %random_preferences1(+N, ?Preferences)
 random_preferences1(_N, []).
 random_preferences1(N, [H|T]) :-
