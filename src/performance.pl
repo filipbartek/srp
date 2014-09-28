@@ -69,13 +69,13 @@ make_instances1(Size, [Seed|Seeds], [Instance|Instances]) :-
 Predicate: make_instance/3
 Generates a random instance of SRP with an identifier.
 
-> make_instance(+Size:int, +Seed:int, -Instance:list) is det.
+> make_instance(+Size:int, +Seed:int, -Instance) is det.
 
 Arguments:
 Size - Number of participants in the generated instance.
 Seed - Seed to initialize the random number generator.
-Instance - List of preference lists that describe the instance.
-Compatible with <srp/3>.
+Instance - An instantiation of predicate _instance_ whose second argument is
+a list of preference lists compatible with <srp/3>.
 
 See also:
 <make_instances/3>, <srp/3>
