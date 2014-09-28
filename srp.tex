@@ -153,6 +153,11 @@ This argument of \code{labeling} is exposed
 in the third argument of the extended \code{srp/3}.
 For example, one may execute \code{srp(Preferences, Matching, [ffc, assumptions(K)])}.
 
+\subsection{Example instances}
+Examples of problem instances for the solver are included in file \file{srp.pl}
+in unit tests for \code{srp/2}
+(in a block starting with statement \code{:- begin\_tests(srp\_2).}).
+
 \subsection{Correctness}
 Correctness of the implementation was assessed using a set of tests on small
 manually constructed and solved \srp{} instances (up to size 8).
