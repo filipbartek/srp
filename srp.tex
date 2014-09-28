@@ -197,17 +197,14 @@ such that every possible permutation occurs with equal probability.
 
 \subsubsection{Measurement procedure}
 The following instance sizes (values of $n$) were examined:
-0, 1, 2, 4, 8, 16, 24, 32, 40, 48 and 64.
-
-I seem to have hit a wall in running time with an instance of size 128
-so I resorted to focusing on smaller instances.
-The steep rise of running time could have been caused by a cache overflow
-or by inherent inefficiency of the solver.
-Note that \srp{} was shown to be soluble
-in quadratic time.\footnote{Source: Wikipedia - Stable roommates problem}
+0, 1, 2, 4, 8, 16, 24, 32, 40, 48, 64, 72, 80 and 88.
+I didn't proceed past the size 88
+because at $n = 96$ the solver failed because of insufficient memory.
 
 For every examined value of $n$, 10 random instances were generated.
-Each of these instances was solved using each of the three relevant basic
+
+For sizes up to 64,
+each of these 10 instances was solved using each of the three relevant basic
 search strategies offered by \code{clpfd:labeling/2}:
 
 \begin{itemize}
@@ -216,16 +213,21 @@ search strategies offered by \code{clpfd:labeling/2}:
 \item \code{ffc} (most constrained).
 \end{itemize}
 
+Since \code{leftmost} performed time-wise significantly worse
+than \acrshort{ff} and \code{ffc} (see figure \ref{fig:time}),
+I left it out of measurements on sizes larger than 64.
+
 Two values were measured: \emph{time to find a solution}
 and \emph{number of assumptions taken in finding the first solution}.
 
 Time was measured using \sicstusprolog{} built-in predicate \code{statistics/2}
 with keyword \code{runtime}.
 The solving procedure was repeated
-100 times on instances of size at most 16 and
-10 times on instances of size between 24 and 64
+100 times on instances of size at most 32,
+10 times on instances of size between 40 and 56
+and 1 time on instances of size above 56.
 (see figure \ref{fig:executions}).
-The reported times are averages from these executions.
+The running times discussed further on are averages across these executions.
 
 \begin{figure}
 \centering
@@ -234,16 +236,20 @@ The reported times are averages from these executions.
 \label{fig:executions}
 \end{figure}
 
-Assumptions are the choices made by \code{clpfd:labeling/2} during the search for
-a solution.
+Assumptions are the choices made by \code{clpfd:labeling/2}
+during the search for a solution.
 Their number is extracted from the search procedure using the option
 \code{assumptions(K)}.
 
-In all cases, the solver was only run until it found the first solution.
-In cases an instance had no solution,
-no measurements were performed for that instance.
-For all instance sizes, at least 5 of the 10 generated instances had a solution.
-See statistics of solubility of instances in figure \ref{fig:soluble}.
+In all cases, the solver was only run until it found any solution
+or concluded that no solution exists for the given instance.
+Rationale: since there is no defined distinction between the valid solutions,
+I assume that the user of the solver will typically be satisfied
+with any valid solution, or knowledge of its absence.
+
+The numbers of assumptions were only measured on soluble instances.
+For all instance sizes, at least 5 of the 10 generated instances had a solution
+(see figure \ref{fig:soluble}).
 
 \begin{figure}
 \centering
@@ -253,51 +259,27 @@ See statistics of solubility of instances in figure \ref{fig:soluble}.
 \end{figure}
 
 \subsubsection{Results}
-The raw measured data can be examined in the attached file \file{result.csv}.
+The raw measured data can be examined in the attached file \file{data.csv}.
 
-Average solving time for various instance sizes and search strategies is shown
-in figure \ref{fig:time}.
-The averages run across up to 10 random instances of a given size.
-As you can see in the chart,
-the times differ very little among search strategies
-and rise with instance size.
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{time}
-\caption{Average solving time}
-\label{fig:time}
-\end{figure}
-
-The times differ little among instances of a given size.
-As an example a box plot of times with strategy \code{leftmost} is shown
-in figure \ref{fig:leftmost-time}.
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{leftmost_time}
-\caption{Dispersion of running time with search strategy \code{leftmost}}
-\label{fig:leftmost-time}
-\end{figure}
-
+\paragraph{Assumptions}
 The average numbers of assumptions made in the search for the first solution
 are shown in figure \ref{fig:assumptions}.
-The averages run across up to 10 random instances of a given size.
+The averages run across the soluble instances of a given size
+(at least 5 and up to 10, as indicated in \ref{fig:soluble}).
 
-Note that the numbers happen to be equal for strategies \code{ff} and \code{ffc}
+Note that the numbers of assumptions happen to match
+for strategies \acrshort{ff} and \code{ffc}
 (on an instance-to-instance basis, not only the averages).
-%TODO: Explain.
+Since \code{ffc} chooses the most constrained variable
+where \acrshort{ff} simply chooses the first declared variable,
+I suppose that the implementation simply happens to declare the variables
+in descending order of number of suspended constraints.
+%TODO: Verify.
 
 In the chart you can see that the number of assumptions rises with instance size
 and rises more quickly for the strategy \code{leftmost}.
-This is to be expected since \code{ff} and \code{ffc} use more elaborate heuristics
+This is to be expected since \acrshort{ff} and \code{ffc} use more elaborate heuristics
 for lowering the expected number of assumptions.
-However, it seems that the numbers of assumptions don't propagate in running times
-(cf.~figure \ref{fig:time}).
-A possible explanation is that the time saved by lowering the number of assumptions
-is consumed by the overhead of the more expensive heuristics
-of \code{ff} and \code{ffc}.
-Further analysis would be required to determine the exact cause.
 
 \begin{figure}
 \centering
@@ -307,21 +289,62 @@ Further analysis would be required to determine the exact cause.
 \end{figure}
 
 You can see the dispersion of number of assumptions among instances of a given size
-for search strategy \code{leftmost} in figure \ref{fig:leftmost-assumptions}.
+for search strategy \acrshort{ff} in figure \ref{fig:ff-assumptions}.
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{leftmost_assumptions}
-\caption{Dispersion of number of assumptions with search strategy \code{leftmost}}
-\label{fig:leftmost-assumptions}
+\includegraphics[width=\linewidth]{ff_assumptions}
+\caption{Dispersion of number of assumptions with search strategy \acrshort{ff}}
+\label{fig:ff-assumptions}
 \end{figure}
+
+\paragraph{Running times}
+Average running times for various instance sizes and search strategies are shown
+in figure \ref{fig:time}.
+The averages run across 10 instances of a given size.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{time}
+\caption{Average solving time}
+\label{fig:time}
+\end{figure}
+
+As expected from the numbers of assumptions,
+the strategies \acrshort{ff} and \code{ffc} perform similarly well.
+Their running times are hardly distinguishable in the chart.
+This suggests namely that the overhead of using
+the more complex heuristics of \code{ffc} over \acrshort{ff} is negligible.
+
+You can also observe a steep jump in running time
+of the strategy \code{leftmost} at instance size 64.
+Since \acrshort{ff} and \code{ffc} adapt to larger instance sizes more smoothly
+and perform well even on smaller instances,
+they appear to be better choices in general for this solver.
+
+The running times differ a lot among instances of a given size.
+As an example a box plot of running times with strategy \acrshort{ff} is shown
+in figure \ref{fig:ff-time}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{ff_time}
+\caption{Dispersion of running time with search strategy \acrshort{ff}}
+\label{fig:ff-time}
+\end{figure}
+
+Note that \srp{} was shown to be soluble
+in quadratic time.\footnote{Source: Wikipedia - Stable roommates problem}
 
 \section{Conclusions}
 It appears that the delivered implementation of \srp{} solver can be used
-for fast solving of problem instances of sizes up to approximately 64.
+for fast solving of problem instances of sizes up to approximately 88.
+The measured average time for solving an instance of size 88
+with search strategy \acrshort{ff} is approximately 2 seconds.
 
-The search strategies \code{leftmost}, \code{ff} and \code{ffc}
-perform comparably well.
+The search strategies \acrshort{ff} and \code{ffc}
+perform significantly better than the strategy \code{leftmost}
+on instances of size at least 48.
 
 \printglossaries{}
 
