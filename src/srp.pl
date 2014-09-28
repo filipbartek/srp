@@ -159,6 +159,14 @@ Maps _clpfd:element_ constraint on lists of domain variables.
 elements(Xs, Lists, Ys) :-
   maplist(element, Xs, Lists, Ys).
 
+:- begin_tests(elements_3).
+test(empty, [true]) :- elements([], [], []).
+test(n1_true, [true]) :- elements([1], [[2,1]], [2]).
+test(n1_fail, [fail]) :- elements([1], [[2,1]], [1]).
+test(n2_true, [true]) :- elements([1,2], [[2,1], [1,2]], [2,2]).
+:- end_tests(elements_3).
+
+
 %stable_prefix_i(+Scores, ?PartnerScores, +N, +I)
 stable_prefix_i(Scores, PartnerScores, N, I) :-
   (I == 0
