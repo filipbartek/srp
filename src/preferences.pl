@@ -12,6 +12,9 @@
   end_tests/1
 ]).
 
+:- consult('random.pl').
+%range/2
+
 %preferences(+People, -Preferences, -Dict)
 preferences(People, Preferences, Dict) :-
   length(People, N),
