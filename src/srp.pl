@@ -149,7 +149,13 @@ test(kleinberg_2, [all(Partners == [[3,4,1,2], [4,3,2,1]])]) :-
 :- end_tests(srp_scores).
 
 
-%elements(?Xs, +Lists, ?Ys)
+
+/*
+Predicate: elements/3
+Maps _clpfd:element_ constraint on lists of domain variables.
+
+> elements(?Xs:list, +Lists:list, ?Ys:list) is nondet.
+*/
 elements(Xs, Lists, Ys) :-
   maplist(element, Xs, Lists, Ys).
 
