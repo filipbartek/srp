@@ -12,6 +12,12 @@ Example of usage:
   setrand/1
 ]).
 
+:- consult('srp.pl').
+%srp/3
+
+:- consult('random.pl').
+%random_preferences/2
+
 write_results(_Stream, []).
 write_results(Stream, [Result|Results]) :-
   write_result(Stream, Result),
