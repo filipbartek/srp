@@ -9,7 +9,8 @@ problem.
 
 :- use_module(library(lists), [
   nth1/3,
-  permutation/2
+  permutation/2,
+  maplist/4
 ]).
 
 :- use_module(library(plunit), [
@@ -149,10 +150,8 @@ test(kleinberg_2, [all(Partners == [[3,4,1,2], [4,3,2,1]])]) :-
 
 
 %elements(?Xs, +Lists, ?Ys)
-elements([], [], []).
-elements([X|Xs], [List|Lists], [Y|Ys]) :-
-  element(X, List, Y),
-  elements(Xs, Lists, Ys).
+elements(Xs, Lists, Ys) :-
+  maplist(element, Xs, Lists, Ys).
 
 %stable_prefix_i(+Scores, ?PartnerScores, +N, +I)
 stable_prefix_i(Scores, PartnerScores, N, I) :-
