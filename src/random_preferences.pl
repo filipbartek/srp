@@ -8,7 +8,8 @@ To reset the randomness seed, execute the following goal:
 */
 
 :- use_module(library(random), [
-  random_permutation/2
+  random_permutation/2,
+  setrand/1
 ]).
 
 :- use_module(library(plunit), [
@@ -18,6 +19,10 @@ To reset the randomness seed, execute the following goal:
 
 :- consult('valid_preferences.pl').
 %valid_preferences/1
+
+random_preferences(N, Seed, Preferences) :-
+  setrand(Seed),
+  random_preferences(N, Preferences).
 
 /*
 Predicate: random_preferences/2
