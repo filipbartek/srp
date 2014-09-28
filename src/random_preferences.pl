@@ -1,5 +1,5 @@
 /*
-File: random.pl
+File: random_preferences.pl
 
 The predicates defined in this file use randomness from library _random_.
 To reset the randomness seed, execute the following goal:

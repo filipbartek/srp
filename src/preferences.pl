@@ -12,7 +12,7 @@
   end_tests/1
 ]).
 
-:- consult('random.pl').
+:- consult('random_preferences.pl').
 %range/2
 
 %preferences(+People, -Preferences, -Dict)

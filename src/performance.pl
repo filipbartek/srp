@@ -15,7 +15,7 @@ Example of usage:
 :- consult('srp.pl').
 %srp/3
 
-:- consult('random.pl').
+:- consult('random_preferences.pl').
 %random_preferences/2
 
 write_results(_Stream, []).
