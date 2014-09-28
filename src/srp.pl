@@ -116,13 +116,6 @@ test(kleinberg_2, [true]) :-
 :- end_tests(srp).
 
 
-%members(?Elements, ?Lists)
-members([], []).
-members([EH|ET], [LH|LT]) :-
-  member(EH, LH),
-  members(ET, LT).
-
-
 /*
 Predicate: srp_scores/3
 Assigns partners so that all the constraints hold according to given scores.
