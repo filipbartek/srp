@@ -120,16 +120,16 @@ measure(Instance, Executions, Strategy, Result) :-
 timeit(Stmt, Number, Runtime, Walltime) :-
   statistics(runtime, _),
   statistics(walltime, _),
-  call_repeatedly(Stmt, Number),
+  try_repeatedly(Stmt, Number),
   statistics(walltime, [_, Walltime]),
   statistics(runtime, [_, Runtime]).
 
-call_repeatedly(Stmt, N) :-
+try_repeatedly(Stmt, N) :-
   (N == 0
   ; N > 0 ->
     try(Stmt),
     N1 is N - 1,
-    call_repeatedly(Stmt, N1)).
+    try_repeatedly(Stmt, N1)).
 
 try(Stmt) :-
   call(Stmt), !.
