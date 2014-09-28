@@ -63,7 +63,7 @@ srp(Preferences, Partners, Options) :-
   make_scores(Preferences, Scores),
   srp_scores(Scores, Partners, Options).
 
-:- begin_tests(srp).
+:- begin_tests(srp_2).
 
 test(n0, [true(Partners == [])]) :- srp([], Partners).
 test(n1, [true(Partners == [1])]) :- srp([[1]], Partners).
@@ -114,7 +114,7 @@ test(kleinberg_2, [true]) :-
   findall(Partners, srp(Preferences, Partners), SolutionsActual),
   permutation(SolutionsExpected, SolutionsActual).
 
-:- end_tests(srp).
+:- end_tests(srp_2).
 
 
 /*
