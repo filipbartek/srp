@@ -11,6 +11,11 @@ To reset the randomness seed, execute the following goal:
   random_permutation/2
 ]).
 
+:- use_module(library(plunit), [
+  begin_tests/1,
+  end_tests/1
+]).
+
 /*
 Predicate: random_preferences/2
 Generates random instance of stable roommates problem of a given size.
