@@ -77,6 +77,9 @@ Seed - Seed to initialize the random number generator.
 Instance - An instantiation of predicate _instance_ whose second argument is
 a list of preference lists compatible with <srp/3>.
 
+Example of usage:
+> make_instance(16, 0, Instance).
+
 See also:
 <make_instances/3>, <srp/3>
 */
