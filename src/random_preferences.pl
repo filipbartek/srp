@@ -16,6 +16,9 @@ To reset the randomness seed, execute the following goal:
   end_tests/1
 ]).
 
+:- consult('valid_preferences.pl').
+%valid_preferences/1
+
 /*
 Predicate: random_preferences/2
 Generates random instance of stable roommates problem of a given size.
@@ -38,6 +41,14 @@ random_preferences(N, Preferences) :-
 :- begin_tests(random_preferences_2).
 test(n0, [true(Preferences == [])]) :- random_preferences(0, Preferences).
 test(n1, [true(Preferences == [[1]])]) :- random_preferences(1, Preferences).
+test(n2, [true]) :-
+  random_preferences(2, Preferences),
+  length(Preferences, 2),
+  valid_preferences(Preferences).
+test(n3, [true]) :-
+  random_preferences(3, Preferences),
+  length(Preferences, 3),
+  valid_preferences(Preferences).
 :- end_tests(random_preferences_2).
 
 %random_preferences1(+N, ?Preferences)
