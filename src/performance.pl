@@ -127,6 +127,15 @@ timeit(Stmt, Number, Runtime, Walltime) :-
 call_repeatedly(Stmt, N) :-
   (N == 0
   ; N > 0 ->
-    call(Stmt),
+    try(Stmt),
     N1 is N - 1,
     call_repeatedly(Stmt, N1)).
+
+try(Stmt) :-
+  call(Stmt), !.
+try(_Stmt).
+
+:- begin_tests(try_1).
+test(true, [true]) :- try(true).
+test(fail, [true]) :- try(fail).
+:- end_tests(try_1).
