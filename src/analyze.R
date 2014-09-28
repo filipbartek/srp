@@ -1,6 +1,6 @@
 setwd("~/GitHub/srp/src")
 
-resultsFile = "result.csv"
+resultsFile = "data.csv"
 
 colClasses = list(
 size = "integer",
