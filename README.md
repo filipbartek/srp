@@ -9,7 +9,7 @@ The preference relation can be specified in one of two ways:
 * each participant has a list of potential partners ordered according to desirability or
 * each participant assigns every participant a score.
 
-This program was implemented as the final project for the course [Constraint Programming](http://ktiml.mff.cuni.cz/~bartak/podminky/index.html) (winter 2013/2014) at Charles University in Prague. The final report including results of analysis of performance is available [here](http://ktiml.mff.cuni.cz/~bartak/podminky/index.html).
+This program was implemented as the final project for the course [Constraint Programming](http://ktiml.mff.cuni.cz/~bartak/podminky/index.html) (winter 2013/2014) at Charles University in Prague. The final report including results of analysis of performance is available [here](http://filipbartek.github.io/srp/report.pdf).
 
 ## Problem definition
 
